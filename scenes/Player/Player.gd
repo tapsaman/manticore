@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var PickableClass = preload("res://scenes/Pickable/Pickable.gd")
+
 export(int) var speed = 400
 var rayCastDefaultCast
 var lastVelocity = Vector2(0, 1)
@@ -8,6 +10,11 @@ var holdingPosition = Vector2(0, -25)
 
 func _ready():
 	rayCastDefaultCast = $RayCast2D.get_cast_to()
+	#print("InputMap.get_actions() => ")
+	#print(InputMap.get_actions())
+
+	for a in InputMap.get_actions():
+		print(a, " => ", InputMap.get_action_list(a))
 
 func _process(delta):
 	var velocity = Vector2()
@@ -30,7 +37,7 @@ func _input(event):
 	if event.is_action_released("ui_select"):
 		if holdingItem == null:
 			var collider = $RayCast2D.get_collider()
-			if collider and collider.isPickable:
+			if collider and collider is PickableClass:
 				holdingItem = collider.getPickedUpBy(self)
 		else:
 			holdingItem.getThrownBy(self)

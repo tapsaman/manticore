@@ -3,7 +3,7 @@
     [
         {
             "path": ".",
-            "name": "godot scenes root"
+            "name": "godot proj root"
         }
     ],
     "settings":

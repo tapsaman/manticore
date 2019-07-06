@@ -1,27 +1,33 @@
 extends KinematicBody2D
 
+export(PackedScene) var projectileScene = load("res://scenes/Projectile/Projectile.tscn")
 export(int) var throwSpeed = 1000
 export(float) var throwRotateSpeed = 0.6
-var throwVelocity
 const isPickable = true
 
-# Returns the item player picked up (self or null if)
+# Returns the item player will be holding (self or null)
 func getPickedUpBy(player):
+	# Disable collisions
 	$CollisionShape2D.disabled = true
+
+	# Move to player node
 	get_parent().remove_child(self)
 	player.add_child(self)
-	position = Vector2(0, -25)
+
+	# Set position to players holding position
+	position = player.holdingPosition
+
 	return self
 
 func getThrownBy(player):
-	throwVelocity = player.lastVelocity
-	var scene = get_tree().get_current_scene()
-	get_parent().remove_child(self)
-	scene.add_child(self)
-	print(scene)
-	position = Vector2(player.position.x, player.position.y-25)
+	# Enable collisions
+	$CollisionShape2D.disabled = false
 
-func _process(delta):
-	if throwVelocity:
-		move_and_collide(throwVelocity * throwSpeed * delta)
-		set_rotation(get_rotation() + throwRotateSpeed)
+	# Add projectile instance to scene
+	var projectile = projectileScene.instance()
+	get_tree().get_current_scene().add_child(projectile)
+
+	projectile.initFromPickable(self)
+	projectile.getThrownBy(player)
+
+	queue_free()

@@ -1,9 +1,10 @@
 extends KinematicBody2D
 
-export var speed = 400
+export(int) var speed = 400
 var rayCastDefaultCast
 var lastVelocity = Vector2(0, 1)
 var holdingItem = null
+var holdingPosition = Vector2(0, -25)
 
 func _ready():
 	rayCastDefaultCast = $RayCast2D.get_cast_to()

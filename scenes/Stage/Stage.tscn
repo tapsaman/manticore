@@ -4,3 +4,5 @@
 
 [node name="Stage" type="Node"]
 script = ExtResource( 1 )
+
+[node name="StageCamera" type="Camera2D" parent="."]

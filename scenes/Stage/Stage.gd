@@ -13,9 +13,7 @@ var map # node for ^
 func _ready():
 	
 	loadMap()
-	
-	
-	
+
 	pass 
 
 #Initialize the map

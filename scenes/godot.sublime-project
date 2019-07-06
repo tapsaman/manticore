@@ -1,0 +1,13 @@
+{
+    "folders":
+    [
+        {
+            "path": ".",
+            "name": "godot scenes root"
+        }
+    ],
+    "settings":
+    {
+        "tab_size": 4
+    }
+}

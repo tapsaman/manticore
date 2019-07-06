@@ -4,7 +4,7 @@ extends Node
 export(PackedScene) var playerScene = load("res://scenes/Player/Player.tscn")
 
 #Box
-export(PackedScene) var boxScene = load("res://scenes/Box/Box.tscn")
+export(PackedScene) var boxScene = load("res://scenes/Pickable/Crate.tscn")
 
 #Export packed scene map
 export(PackedScene) var mapScene = load("res://scenes/Map/Map.tscn")

@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 export var speed = 400
 var rayCastDefaultCast
-var pickedUpObject
 var lastVelocity = Vector2(0, 1)
+var holdingItem = null
 
 func _ready():
 	rayCastDefaultCast = $RayCast2D.get_cast_to()
@@ -27,22 +27,10 @@ func _process(delta):
 
 func _input(event):
 	if event.is_action_released("ui_select"):
-		if !pickedUpObject:
+		if holdingItem == null:
 			var collider = $RayCast2D.get_collider()
-			if collider and collider.get("type") == "box":
-				print("selected box")
-				# remove box from scene, add to Player
-				collider.get_parent().remove_child(collider)
-				add_child(collider)
-				collider.position = Vector2(0,-25)
-				collider.pickedUp()
-				pickedUpObject = collider
-				#collider.getNode("CollisionShape2D").disabled = true
+			if collider and collider.isPickable:
+				holdingItem = collider.getPickedUpBy(self)
 		else:
-			print("throwing box")
-			# remove box from Player, add to scene
-			remove_child(pickedUpObject)
-			get_parent().add_child(pickedUpObject)
-			pickedUpObject.position = Vector2(position.x,position.y-25)
-			pickedUpObject.throw(lastVelocity)
-			pickedUpObject = null
+			holdingItem.getThrownBy(self)
+			holdingItem = null

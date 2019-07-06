@@ -5,10 +5,14 @@
 [ext_resource path="res://scenes/Pickable/Crate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/TapsaLevel.tscn" type="PackedScene" id=4]
 
-[node name="Stage" type="Node"]
+[node name="TapsaStage" type="Node"]
 script = ExtResource( 1 )
 playerScene = ExtResource( 2 )
 crateScene = ExtResource( 3 )
 mapScene = ExtResource( 4 )
 
 [node name="StageCamera" type="Camera2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 160.645, 93.8601 )
+playerNum = 1

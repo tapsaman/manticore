@@ -1,44 +1,16 @@
 extends KinematicBody2D
 
-var PickableClass = preload("res://scenes/Pickable/Pickable.gd")
+var PlayerControllerClass = preload("res://scenes/Player/PlayerController.gd")
 
 export(int) var speed = 400
+export(int) var playerNum = 0
 var rayCastDefaultCast
 var lastVelocity = Vector2(0, 1)
 var holdingItem = null
-var holdingPosition = Vector2(0, -25)
+const holdingPosition = Vector2(0, -25)
+var controller
 
 func _ready():
-	rayCastDefaultCast = $RayCast2D.get_cast_to()
-	#print("InputMap.get_actions() => ")
-	#print(InputMap.get_actions())
-
-	for a in InputMap.get_actions():
-		print(a, " => ", InputMap.get_action_list(a))
-
-func _process(delta):
-	var velocity = Vector2()
-	if Input.is_action_pressed("ui_right"):
-		velocity.x += 1
-	if Input.is_action_pressed("ui_left"):
-		velocity.x -= 1
-	if Input.is_action_pressed("ui_down"):
-		velocity.y += 1
-	if Input.is_action_pressed("ui_up"):
-		velocity.y -= 1
-	if velocity.length() > 0:
-		velocity = velocity.normalized()
-		move_and_collide(velocity * speed * delta)
-		var angle = rayCastDefaultCast.angle_to(velocity)
-		$RayCast2D.set_rotation(angle)
-		lastVelocity = velocity
-
-func _input(event):
-	if event.is_action_released("ui_select"):
-		if holdingItem == null:
-			var collider = $RayCast2D.get_collider()
-			if collider and collider is PickableClass:
-				holdingItem = collider.getPickedUpBy(self)
-		else:
-			holdingItem.getThrownBy(self)
-			holdingItem = null
+	controller = PlayerControllerClass.new()
+	controller.init(self)
+	add_child(controller)

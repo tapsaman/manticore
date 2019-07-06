@@ -29,7 +29,7 @@ func _process(delta):
 func _on_Projectile_body_entered(collider):
 	print(collider)
 
-	if collider is StaticBody2D:
+	if collider is StaticBody2D or collider is TileMap:
 		collideAndBreak()
 
 func collideAndBreak():

@@ -26,6 +26,7 @@ func _ready():
 
 func _process(delta):
 	
+	#NOTE: Tie to delta at some point
 	if camShakeAmount > 0.0:
 		shakeCamera(camShakeAmount)
 		camShakeAmount -= camShakeBleed

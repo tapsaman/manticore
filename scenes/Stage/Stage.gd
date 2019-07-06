@@ -15,14 +15,11 @@ export(PackedScene) var crateScene = load("res://scenes/Pickable/Crate.tscn")
 export(PackedScene) var mapScene = load("res://scenes/Map/Map.tscn")
 var map # node for ^
 
-#Crate counter
-#BoxLabel
-var nCrates = 0
-
 func _ready():
 	
 	initMap()
 	initCamera()
+	
 
 func _process(delta):
 	
@@ -62,7 +59,6 @@ func initMap():
 		var crate = crateScene.instance()
 		crate.position = c * map.cell_size + map.cell_size / 2
 		add_child(crate)
-		nCrates += 1
 		map.set_cell(c.x, c.y, -1) #Delete cell
 		
 	#Check where thing1
@@ -74,5 +70,5 @@ func initCamera():
 	#Position camera to center of map
 	var mapSize = map.get_used_rect().size * map.cell_size
 	cam.position = map.position + mapSize / 2
+	#Set pausemenu margin
 	cam.current = true
-	

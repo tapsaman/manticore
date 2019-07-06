@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 var type = "box"
+var isPickable = false
 var flying = false
 var velocity
 var speed = 1000
@@ -16,3 +17,6 @@ func _process(delta):
 	if flying:
 		move_and_collide(velocity * speed * delta)
 		set_rotation(get_rotation() + 1)
+
+#func getPickedUpBy(player):
+	

@@ -25,10 +25,6 @@ func _process(delta):
 		$RayCast2D.set_rotation(angle)
 		lastVelocity = velocity
 
-	#position += velocity * delta
-	#position.x = clamp(position.x, 0, screen_size.x)
-	#position.y = clamp(position.y, 0, screen_size.y)
-
 func _input(event):
 	if event.is_action_released("ui_select"):
 		if !pickedUpObject:

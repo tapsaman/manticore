@@ -18,6 +18,37 @@ _global_script_class_icons={
 config/name="Project Manticore"
 config/icon="res://icon.png"
 
+[input]
+
+P1_Up={
+"deadzone": 0.5,
+"events": [  ]
+}
+P1_Right={
+"deadzone": 0.5,
+"events": [  ]
+}
+P1_Down={
+"deadzone": 0.5,
+"events": [  ]
+}
+P1_Left={
+"deadzone": 0.5,
+"events": [  ]
+}
+P1_Select={
+"deadzone": 0.5,
+"events": [  ]
+}
+P1_Jump={
+"deadzone": 0.5,
+"events": [  ]
+}
+P1_Cancel={
+"deadzone": 0.5,
+"events": [  ]
+}
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"

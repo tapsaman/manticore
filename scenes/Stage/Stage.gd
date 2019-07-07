@@ -15,6 +15,10 @@ export(PackedScene) var crateScene = load("res://scenes/Pickable/Crate.tscn")
 export(PackedScene) var mapScene = load("res://scenes/Map/Map.tscn")
 var map # node for ^
 
+#Holders for map object instances, needed for bot controller logic
+var players = []
+var crates = []
+
 func _ready():
 	
 	initMap()
@@ -48,18 +52,29 @@ func initMap():
 	#id of thing2 = 2 < box here
 
 	#Player
+	var pIndex = 0
+	
 	for c in map.get_used_cells_by_id(1):
 		var player = playerScene.instance()
 		player.position = c * map.cell_size + map.cell_size / 2
+		player.playerNum = 0 if pIndex == 0 else 1
+		player.stage = self
 		add_child(player)
+		players.push_back(player)
 		map.set_cell(c.x, c.y, -1) #Delete cell
+		pIndex += 1
 
+		player.connect("health_change", self, "_on_Player_health_change")
+		
 	#Crates
 	for c in map.get_used_cells_by_id(2):
 		var crate = crateScene.instance()
 		crate.position = c * map.cell_size + map.cell_size / 2
 		add_child(crate)
 		map.set_cell(c.x, c.y, -1) #Delete cell
+		crates.push_back(crate)
+
+		crate.connect("pickable_lifted", self, "_on_Crate_pickable_lifted")
 		
 	#Check where thing1
 	#Check where thing2
@@ -72,3 +87,10 @@ func initCamera():
 	cam.position = map.position + mapSize / 2
 	#Set pausemenu margin
 	cam.current = true
+
+func _on_Player_health_change(playerNum, oldHealth, newHealth):
+	pass
+
+func _on_Crate_pickable_lifted(crate):
+	crates.erase(crate)
+	pass

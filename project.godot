@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Project Manticore"
-run/main_scene="res://scenes/Stage/TapsaStage.tscn"
+run/main_scene="res://scenes/Stage/Stages/Stage_00.tscn"
 config/icon="res://icon.png"
 
 [input]

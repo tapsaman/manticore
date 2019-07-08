@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Stage/Stage.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Stage/Stages/Stage_00_Map.tscn" type="PackedScene" id=2]
+
+[node name="Stage" index="0" instance=ExtResource( 1 )]
+mapScene = ExtResource( 2 )

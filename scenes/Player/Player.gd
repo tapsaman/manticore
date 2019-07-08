@@ -1,11 +1,11 @@
 extends KinematicBody2D
 
-var PlayerControllerClass = preload("res://scenes/Player/PlayerController.gd")
-var BotControllerClass = preload("res://scenes/Player/BotController.gd")
+const PlayerControllerClass = preload("res://scenes/Player/PlayerController.gd")
+const BotControllerClass = preload("res://scenes/Player/BotController.gd")
 
-export(int) var speed = 400
 export(int) var playerNum = 0
 export(bool) var isBot = false
+export(int) var speed = 400
 var rayCastDefaultCast
 var lastVelocity = Vector2(0, 1)
 var holdingItem = null
@@ -16,20 +16,17 @@ var health = 100
 signal health_changed
 
 func _ready():
-	if playerNum == 0:
-		controller = PlayerControllerClass.new()
-	else:
+	if isBot:
 		controller = BotControllerClass.new()
 		speed = 150
+	else:
+		controller = PlayerControllerClass.new()
 		
 	controller.init(self)
 	add_child(controller)
 	
 func getHitBy(projectile):
 	var oldHealth = health
-	var damage = projectile.damage
-	health -= damage
-
-	print("plr" + str(playerNum) + " hp -> " + str(oldHealth) + " - " + str(damage) + " = " + str(health))
+	health -= projectile.damage
 
 	emit_signal("health_changed", playerNum, oldHealth, health)

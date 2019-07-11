@@ -18,7 +18,7 @@ func getPickedUpBy(player):
 	player.add_child(self)
 
 	# Set position to players holding position
-	position = player.holdingPosition
+	position = player.get_node('CarryPivot').position
 
 	emit_signal("pickable_lifted", self)
 

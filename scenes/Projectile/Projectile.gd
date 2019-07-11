@@ -30,11 +30,11 @@ func getThrownBy(_player, velocity):
 	throwVelocity = velocity if velocity else player.lastVelocity
 
 	# Set position to player global holding position
-	position = player.position + player.holdingPosition
+	position = _player.position
 
 func _process(delta):
 	position += throwVelocity * throwSpeed * delta
-	set_rotation(get_rotation() + throwRotateSpeed)
+	#set_rotation(get_rotation() + throwRotateSpeed)
 
 func _on_Projectile_body_entered(collider):
 	if collider != player and collider.has_method("getHitBy"):

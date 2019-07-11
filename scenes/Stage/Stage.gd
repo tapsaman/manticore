@@ -151,7 +151,7 @@ func getRandomMapCell():
 	var x = randi() % maxX + minX
 	var y = randi() % maxY + minY
 
-	return Vector2(x, y) #* map.cell_size
+	return Vector2(x, y)
 
 func cellIsEmpty(pos):
 	$EmptyCellChecker.position = pos * map.cell_size + map.cell_size / 2

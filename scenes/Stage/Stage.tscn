@@ -25,4 +25,3 @@ text = "PAUSE"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EmptyCellChecker"]
 shape = SubResource( 1 )
-[connection signal="timeout" from="CrateTimer" to="." method="_on_CrateTimer_timeout"]
